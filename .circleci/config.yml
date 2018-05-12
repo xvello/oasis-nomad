@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: golang:1.10-alpine
+
+    working_directory: /go/src/github.com/xvello/ndeploy
+    steps:
+      - run: apk add --no-cache python3 git openssh-client bash
+      - run: pip3 install invoke
+      - checkout
+      - run: inv -e deps lint test build

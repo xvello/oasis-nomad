@@ -1,0 +1,16 @@
+[prune]
+  go-tests = true
+  unused-packages = true
+
+[[constraint]]
+  name = "github.com/genuinetools/reg"
+  version = "v0.13.0"
+
+[[constraint]]
+  name = "github.com/hashicorp/nomad"
+  version = "v0.8.3"
+
+[[override]]
+  # Needed by hashicorp/nomad
+  name = "github.com/ugorji/go"
+  revision = "0053ebfd9d0ee06ccefbfe17072021e1d4acebee"
