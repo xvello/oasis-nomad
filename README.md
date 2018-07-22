@@ -1,4 +1,9 @@
 # Oasis Nomad Manager
+
+[![CircleCI](https://circleci.com/gh/xvello/oasis-nomad/tree/master.svg?style=shield)](https://circleci.com/gh/xvello/oasis-nomad/tree/master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/xvello/oasis-nomad)](https://goreportcard.com/report/github.com/xvello/oasis-nomad)
+[![GoDoc](https://godoc.org/github.com/xvello/oasis-nomad?status.svg)](https://godoc.org/github.com/xvello/oasis-nomad)
+
 A Nomad management CLI for single-node and small cluster use cases
 
 # What
