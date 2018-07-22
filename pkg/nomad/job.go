@@ -9,10 +9,27 @@ import (
 	"github.com/xvello/oasis-nomad/pkg/docker/registry"
 )
 
-func (c *Client) updateAndRun(job *api.Job) error {
+func (c *Client) updateAndRun(job *api.Job, skipIdentical bool) error {
 	err := addDigests(job)
 	if err != nil {
 		return err
+	}
+
+	if skipIdentical {
+		plan, _, err := c.cli.Jobs().Plan(job, true, nil)
+		if err != nil {
+			log.WithFields(log.Fields{
+				"job":   jobName(job),
+				"error": err,
+			}).Warn("Cannot plan job")
+			return err
+		}
+		if isPlanDiffEmpty(plan) {
+			log.WithFields(log.Fields{
+				"job": jobName(job),
+			}).Info("Skipping job with no change")
+			return nil
+		}
 	}
 
 	response, _, err := c.cli.Jobs().Register(job, nil)
@@ -34,7 +51,7 @@ func (c *Client) updateAndRun(job *api.Job) error {
 		log.WithFields(log.Fields{
 			"job":    jobName(job),
 			"evalID": response.EvalID,
-		}).Debug("Registered job OK")
+		}).Info("Registered job OK")
 	}
 
 	return nil
@@ -89,4 +106,12 @@ func addDigests(job *api.Job) error {
 	}
 
 	return nil
+}
+
+// isPlanDiffEmpty inspects a JobPlanResponse to determine whether it contains changes
+func isPlanDiffEmpty(plan *api.JobPlanResponse) bool {
+	if plan == nil || plan.Diff == nil {
+		return true
+	}
+	return plan.Diff.Type == "None"
 }

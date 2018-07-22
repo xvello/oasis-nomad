@@ -21,7 +21,7 @@ func (c *Client) Run(files []string) error {
 			hasError++
 			continue
 		}
-		err = c.updateAndRun(job)
+		err = c.updateAndRun(job, true)
 		if err != nil {
 			hasError++
 			continue
@@ -56,7 +56,7 @@ func (c *Client) Update() error {
 			hasError++
 			continue
 		}
-		err = c.updateAndRun(job)
+		err = c.updateAndRun(job, true)
 		if err != nil {
 			hasError++
 			continue

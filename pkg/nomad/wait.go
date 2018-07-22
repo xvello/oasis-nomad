@@ -25,7 +25,7 @@ func (c *Client) Wait(freq, max time.Duration) error {
 				}).Debug("Nomad server unhealthy")
 				continue
 			}
-			log.Debug("Nomad server healthy")
+			log.Info("Nomad server healthy")
 			return nil
 		case <-timeout.C:
 			return err

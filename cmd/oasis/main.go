@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	deployCmd = &cobra.Command{
+	oasisCmd = &cobra.Command{
 		Use:          "oasis [command]",
 		Short:        "Deploys and reports on Nomad jobs",
 		SilenceUsage: true,
@@ -50,11 +50,11 @@ var (
 )
 
 func init() {
-	deployCmd.PersistentFlags().StringVarP(&logLevel, "loglevel", "l", "info", "logging level")
-	deployCmd.AddCommand(runCmd)
-	deployCmd.AddCommand(resetCmd)
-	deployCmd.AddCommand(updateCmd)
-	deployCmd.AddCommand(waitCmd)
+	oasisCmd.PersistentFlags().StringVarP(&logLevel, "loglevel", "l", "info", "logging level")
+	oasisCmd.AddCommand(runCmd)
+	oasisCmd.AddCommand(resetCmd)
+	oasisCmd.AddCommand(updateCmd)
+	oasisCmd.AddCommand(waitCmd)
 	waitCmd.Flags().DurationP("frequency", "f", time.Second, "time between two retries")
 	waitCmd.Flags().DurationP("timeout", "t", 10*time.Second, "maximum time before aborting")
 }
@@ -73,7 +73,7 @@ func setupLogger() error {
 }
 
 func main() {
-	if err := deployCmd.Execute(); err != nil {
+	if err := oasisCmd.Execute(); err != nil {
 		log.Error(err)
 		os.Exit(-1)
 	}
