@@ -3,6 +3,7 @@ package nomad
 import (
 	"fmt"
 
+	"github.com/hashicorp/nomad/api"
 	"github.com/hashicorp/nomad/jobspec"
 	log "github.com/sirupsen/logrus"
 )
@@ -35,7 +36,7 @@ func (c *Client) Run(files []string) error {
 }
 
 // Update updates all running jobs on the Nomad cluster to the latest digest
-func (c *Client) Update() error {
+func (c *Client) Update(parallelism int) error {
 	hasError := 0
 
 	jobs, _, err := c.cli.Jobs().List(nil)
@@ -43,8 +44,44 @@ func (c *Client) Update() error {
 		return err
 	}
 
-	for _, j := range jobs {
+	// Start workers
+	jobChan := make(chan *api.JobListStub)
+	defer close(jobChan)
+	errChan := make(chan error)
+	defer close(errChan)
+	for i := 0; i < parallelism; i++ {
+		go c.jobSubmitRoutine(jobChan, errChan)
+	}
+
+	// Submit jobs
+	go func() {
+		for _, j := range jobs {
+			jobChan <- j
+		}
+	}()
+
+	// Wait for results
+	var finished int
+	for err := range errChan {
+		if err != nil {
+			hasError++
+		}
+		finished++
+		if finished == len(jobs) {
+			break
+		}
+	}
+
+	if hasError > 0 {
+		return fmt.Errorf("%d out of %d jobs errored out", hasError, len(jobs))
+	}
+	return nil
+}
+
+func (c *Client) jobSubmitRoutine(jobs <-chan *api.JobListStub, errs chan<- error) {
+	for j := range jobs {
 		if j == nil {
+			errs <- nil
 			continue
 		}
 		job, _, err := c.cli.Jobs().Info(j.ID, nil)
@@ -53,20 +90,12 @@ func (c *Client) Update() error {
 				"job":   jobName(job),
 				"error": err,
 			}).Warn("Cannot retrieve job")
-			hasError++
+			errs <- err
 			continue
 		}
 		err = c.updateAndRun(job, true)
-		if err != nil {
-			hasError++
-			continue
-		}
+		errs <- err
 	}
-
-	if hasError > 0 {
-		return fmt.Errorf("%d out of %d jobs errored out", hasError, len(jobs))
-	}
-	return nil
 }
 
 // Reset deletes all running jobs on the Nomad cluster
