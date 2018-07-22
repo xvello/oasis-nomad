@@ -2,11 +2,16 @@ version: 2
 jobs:
   build:
     docker:
-      - image: golang:1.10-alpine
-
+      - image: xvello/oasis-circleci-runner
     working_directory: /go/src/github.com/xvello/oasis-nomad
     steps:
-      - run: apk add --no-cache python3 git openssh-client bash
-      - run: pip3 install invoke
       - checkout
-      - run: inv -e deps lint test build
+      - restore_cache:
+         keys:
+           - vendor-{{ checksum "Gopkg.lock" }}
+      - run: ls vendor/ || dep ensure -vendor-only
+      - run: inv -e lint test build
+      - save_cache:
+          key: vendor-{{ checksum "Gopkg.lock" }}
+          paths:
+            - "/go/src/github.com/xvello/oasis-nomad/vendor"

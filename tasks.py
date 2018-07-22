@@ -29,4 +29,11 @@ def test(ctx):
 
 @task
 def build(ctx):
+    """ Build the oasis binary """
     ctx.run("go build -o oasis ./cmd/oasis")
+
+@task
+def docker_runner(ctx):
+    """ Build and push the CI docker image"""
+    ctx.run("docker build -t xvello/oasis-circleci-runner .circleci")
+    ctx.run("docker push xvello/oasis-circleci-runner")
