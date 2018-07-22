@@ -158,12 +158,11 @@
   revision = "6bb64b370b90e7ef1fa532be9e591a81c3493e00"
 
 [[projects]]
-  branch = "master"
-  digest = "1:e12b92b8bb20af6e299e9829534cfe790857702a988d3f0443e772c9d82a4fd2"
+  digest = "1:32c0e96a63bd093eccf37db757fb314be5996f34de93969321c2cbef893a7bd6"
   name = "github.com/hashicorp/go-version"
   packages = ["."]
   pruneopts = "UT"
-  revision = "23480c0665776210b5fbbac6eaaee40e3e6a96b7"
+  revision = "270f2f71b1ee587f3b609f00f422b76a6b28f348"
 
 [[projects]]
   branch = "master"
@@ -356,10 +355,17 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:436c6bd15ad382db2caefd023c5e627e2140d818f2090ca16a8ec119db43e491"
+  digest = "1:423234482f69857b94abb8b82516422a5e8f6f2d8de5dfac73ba4310bcc7afff"
   name = "golang.org/x/crypto"
   packages = [
     "blake2b",
+    "cast5",
+    "openpgp",
+    "openpgp/armor",
+    "openpgp/elgamal",
+    "openpgp/errors",
+    "openpgp/packet",
+    "openpgp/s2k",
     "ssh/terminal",
   ]
   pruneopts = "UT"
@@ -383,12 +389,15 @@
   input-imports = [
     "github.com/docker/docker/api/types",
     "github.com/genuinetools/reg/registry",
+    "github.com/hashicorp/go-version",
     "github.com/hashicorp/nomad/api",
     "github.com/hashicorp/nomad/jobspec",
     "github.com/sirupsen/logrus",
     "github.com/spf13/cobra",
     "github.com/stretchr/testify/assert",
+    "github.com/stretchr/testify/require",
     "github.com/stretchr/testify/suite",
+    "golang.org/x/crypto/openpgp",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

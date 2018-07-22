@@ -14,3 +14,7 @@
   # Needed by hashicorp/nomad
   name = "github.com/ugorji/go"
   revision = "0053ebfd9d0ee06ccefbfe17072021e1d4acebee"
+
+[[constraint]]
+  name = "github.com/hashicorp/go-version"
+  revision = "270f2f71b1ee587f3b609f00f422b76a6b28f348"
