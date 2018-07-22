@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/nomad/jobspec"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/xvello/ndeploy/pkg/docker/registry"
+	"github.com/xvello/oasis-nomad/pkg/docker/registry"
 )
 
 type injectSuite struct {

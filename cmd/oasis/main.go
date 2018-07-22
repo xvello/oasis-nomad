@@ -10,7 +10,7 @@ import (
 
 var (
 	deployCmd = &cobra.Command{
-		Use:          "ndeploy [command]",
+		Use:          "oasis [command]",
 		Short:        "Deploys and reports on Nomad jobs",
 		SilenceUsage: true,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {

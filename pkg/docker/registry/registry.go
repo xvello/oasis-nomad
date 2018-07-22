@@ -1,7 +1,7 @@
 package registry
 
 import (
-	"github.com/xvello/ndeploy/pkg/docker/utils"
+	"github.com/xvello/oasis-nomad/pkg/docker/utils"
 )
 
 // TagsForImage returns all available tags for a

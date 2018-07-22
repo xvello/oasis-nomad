@@ -29,4 +29,4 @@ def test(ctx):
 
 @task
 def build(ctx):
-    ctx.run("go build -o ndeploy ./cmd/ndeploy")
+    ctx.run("go build -o oasis ./cmd/oasis")

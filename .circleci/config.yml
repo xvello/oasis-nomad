@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: golang:1.10-alpine
 
-    working_directory: /go/src/github.com/xvello/ndeploy
+    working_directory: /go/src/github.com/xvello/oasis-nomad
     steps:
       - run: apk add --no-cache python3 git openssh-client bash
       - run: pip3 install invoke

@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/nomad/api"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/xvello/ndeploy/pkg/docker/registry"
+	"github.com/xvello/oasis-nomad/pkg/docker/registry"
 )
 
 func (c *Client) updateAndRun(job *api.Job) error {

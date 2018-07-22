@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/xvello/ndeploy/pkg/nomad"
+	"github.com/xvello/oasis-nomad/pkg/nomad"
 )
 
 func run(cmd *cobra.Command, args []string) error {
