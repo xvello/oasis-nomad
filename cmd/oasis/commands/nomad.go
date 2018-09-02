@@ -13,12 +13,12 @@ import (
 
 var (
 	agentCmd = &cobra.Command{
-		Use:   "agent [command]",
+		Use:   "nomad [command]",
 		Short: "Manage the Nomad agent binary",
 	}
 	agentUpgradeCmd = &cobra.Command{
 		Use:   "upgrade",
-		Short: "Upgrade the agent",
+		Short: "Upgrade the Nomad agent",
 		Args:  cobra.ExactArgs(0),
 		RunE:  agentUpgrade,
 	}
