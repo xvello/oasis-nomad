@@ -19,7 +19,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:638330185138bea7393149e9a2f71583e849eb456eb38d5736d8c3dff7211582"
+  digest = "1:ad9042dd13ebac76a445d6ed2d4e76aae641c679c6cbdf64b931081f86b73d7e"
   name = "github.com/docker/distribution"
   packages = [
     ".",
@@ -35,7 +35,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:56162498e1ab549e8cbee77bbb01474bd419b535b182ca380953ab9a3b758e31"
+  digest = "1:601b2dbf1703e1175c6640f211aae1dd5f63131b45874efbc72899a62d8816b1"
   name = "github.com/docker/docker"
   packages = [
     "api/types",
@@ -102,7 +102,7 @@
   version = "1.0.0"
 
 [[projects]]
-  digest = "1:64cc209535c832295264155ed93454cb56141a8691bbd7663e1cb54d636b0e60"
+  digest = "1:7d9085638f210faa86720b5fe8c4cd9303edb853ed93929852a4384a4e6c956f"
   name = "github.com/hashicorp/consul"
   packages = ["api"]
   pruneopts = "UT"
@@ -151,7 +151,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:35e9b9d8a799b6d4d4196f19cba3b0ffabf3c96b43eaedf388263d033c066616"
+  digest = "1:45aad874d3c7d5e8610427c81870fb54970b981692930ec2a319ce4cb89d7a00"
   name = "github.com/hashicorp/go-rootcerts"
   packages = ["."]
   pruneopts = "UT"
@@ -177,7 +177,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:8951fe6e358876736d8fa1f3992624fdbb2dec6bc49401c1381d1ef8abbb544f"
+  digest = "1:12247a2e99a060cc692f6680e5272c8adf0b8f572e6bce0d7095e624c958a240"
   name = "github.com/hashicorp/hcl"
   packages = [
     ".",
@@ -194,7 +194,7 @@
   revision = "ef8a98b0bbce4a65b5aa4c368430a80ddc533168"
 
 [[projects]]
-  digest = "1:38a7aee0113fd6ff47e85aaf5f3fc570f4ca29b6929e1530b1e27c36b8cc36c4"
+  digest = "1:2270a5b0b42571b92c1f64accae929dd1e5ea28a1a329729e935e0e201f60768"
   name = "github.com/hashicorp/nomad"
   packages = [
     "acl",
@@ -208,8 +208,8 @@
     "nomad/structs",
   ]
   pruneopts = "UT"
-  revision = "1eedb7753f93dcd827819e42e8583cebe5fbc075"
-  version = "v0.8.3"
+  revision = "75c5fb48c53cfa95926a941a55b3f06553be2d0f"
+  version = "v0.8.4"
 
 [[projects]]
   digest = "1:56f26733346010e935b1ddb0e1ffa00bb054133b3ddb3f481261d27a7ae914df"
@@ -220,7 +220,7 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:8926b09bc7e669ef6aec95f6ad5abb7240f232cc217f3841f9097d5c8c482666"
+  digest = "1:0dd7b7b01769f9df356dc99f9e4144bdbabf6c79041ea7c0892379c5737f3c44"
   name = "github.com/hashicorp/serf"
   packages = ["coordinate"]
   pruneopts = "UT"
@@ -284,7 +284,7 @@
   revision = "c9281466c8b2f606084ac71339773efd177436e7"
 
 [[projects]]
-  digest = "1:7c5c09ec84d18b0dc5ec0de36c1b8d12d3bf1815d04b90dc50ab082f3b8f13f1"
+  digest = "1:11db38d694c130c800d0aefb502fb02519e514dc53d9804ce51d1ad25ec27db6"
   name = "github.com/opencontainers/image-spec"
   packages = [
     "specs-go",
@@ -319,7 +319,7 @@
   version = "v1.0.4"
 
 [[projects]]
-  digest = "1:64768bf51e20ae5de0abfaa7248cdde985200f816df0e4ce157b3dc4ba55133e"
+  digest = "1:982714fa3eaafd4251f5ccf3d133b706ad742b86c195d594e1a86050a02f87a8"
   name = "github.com/spf13/cobra"
   packages = ["."]
   pruneopts = "UT"
@@ -335,7 +335,7 @@
   version = "v1.0.1"
 
 [[projects]]
-  digest = "1:a2d9ae08610b8291a6af9dc0eded415ce5859181c7756989c5164195dda46253"
+  digest = "1:c52d48fe752736ae45b72959e1e4fc1a5b60d5b56f8fad42c58414daab5f309d"
   name = "github.com/stretchr/testify"
   packages = [
     "assert",
@@ -355,7 +355,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:423234482f69857b94abb8b82516422a5e8f6f2d8de5dfac73ba4310bcc7afff"
+  digest = "1:531b46d296beec76d089b3e3e5355e156c89890b453bb8886e37dca45a4b4823"
   name = "golang.org/x/crypto"
   packages = [
     "blake2b",
@@ -373,7 +373,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:ddd92719cf33865f6cfddd34140d18deecccc53b3ee5db1b3108f4d7049c5d2b"
+  digest = "1:ab083f18c5805706a6c85110890412eeb7124d452c7185ecc649e798e8405418"
   name = "golang.org/x/sys"
   packages = [
     "cpu",
