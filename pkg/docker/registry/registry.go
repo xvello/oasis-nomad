@@ -43,6 +43,5 @@ func ResolveFromString(image string) (utils.ImageSpecs, error) {
 	if err != nil {
 		return spec, err
 	}
-
 	return ResolveDigest(spec)
 }

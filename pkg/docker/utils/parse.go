@@ -7,13 +7,14 @@ import (
 
 const (
 	dockerHubRegistry = "registry-1.docker.io"
-	defaultTag        = "latest"
-	dockerHubLibrary  = "library"
+	dockerHubShortReg = "docker.io"
+
+	defaultTag       = "latest"
+	dockerHubLibrary = "library"
 )
 
 // ParseImageString parses a human-readable image name into
 // Registry + Image + Tag
-// TODO: support custom registries
 func ParseImageString(image string) (ImageSpecs, error) {
 	specs := ImageSpecs{
 		Registry: dockerHubRegistry,
@@ -32,8 +33,19 @@ func ParseImageString(image string) (ImageSpecs, error) {
 		specs.Tag = parts[1]
 	}
 
-	// Parse image
-	specs.Image = parts[0]
+	// Parse registry out of the image name
+	if strings.Count(parts[0], "/") == 2 {
+		parts = strings.SplitN(parts[0], "/", 2)
+		specs.Registry = parts[0]
+		specs.Image = parts[1]
+	} else {
+		specs.Image = parts[0]
+	}
+
+	// Special case of the docker registry
+	if specs.Registry == dockerHubShortReg {
+		specs.Registry = dockerHubRegistry
+	}
 
 	// Special case of the docker library images
 	if specs.Registry == dockerHubRegistry {

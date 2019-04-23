@@ -63,6 +63,26 @@ func TestParseImageString(t *testing.T) {
 			},
 			err: nil,
 		},
+		{
+			input: "docker.io/user/test",
+			specs: ImageSpecs{
+				Registry: dockerHubRegistry,
+				Image:    "user/test",
+				Tag:      "latest",
+				Digest:   "",
+			},
+			err: nil,
+		},
+		{
+			input: "quay.io/user/test:version",
+			specs: ImageSpecs{
+				Registry: "quay.io",
+				Image:    "user/test",
+				Tag:      "version",
+				Digest:   "",
+			},
+			err: nil,
+		},
 	}
 	for i, tc := range cases {
 		t.Run(fmt.Sprintf("%d: %s", i, tc.input), func(t *testing.T) {

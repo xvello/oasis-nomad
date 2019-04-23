@@ -11,11 +11,13 @@ type ImageSpecs struct {
 }
 
 // String returns the docker image string representation
-// FIXME: support custom registries
 func (i ImageSpecs) String() string {
 	out := fmt.Sprintf("%s:%s", i.Image, i.Tag)
 	if i.Digest != "" {
 		out = fmt.Sprintf("%s@%s", out, i.Digest)
+	}
+	if i.Registry != dockerHubRegistry {
+		out = fmt.Sprintf("%s/%s", i.Registry, out)
 	}
 
 	return out

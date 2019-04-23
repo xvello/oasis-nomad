@@ -1,6 +1,8 @@
 package registry
 
 import (
+	"time"
+
 	"github.com/docker/docker/api/types"
 	"github.com/genuinetools/reg/registry"
 )
@@ -22,5 +24,9 @@ func connect(url string) (Source, error) {
 	auth := types.AuthConfig{
 		ServerAddress: url,
 	}
-	return registry.New(auth, false)
+	opt := registry.Opt{
+		SkipPing: true,
+		Timeout:  5 * time.Second,
+	}
+	return registry.New(auth, opt)
 }
