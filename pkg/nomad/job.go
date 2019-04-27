@@ -64,6 +64,13 @@ func addDigests(job *api.Job) error {
 		return errors.New("nil job pointer")
 	}
 
+	if job.Type != nil && *job.Type == "batch" {
+		log.WithFields(log.Fields{
+			"job": jobName(job),
+		}).Info("Not adding digest to batch job")
+		return nil
+	}
+
 	for _, group := range job.TaskGroups {
 		if group == nil {
 			continue
