@@ -22,12 +22,15 @@ func connect(url string) (Source, error) {
 		return mockedSource, nil
 	}
 
-	auth := types.AuthConfig{
-		ServerAddress: url,
+	// Because as usual Docker likes to be a special case
+	if url == "docker.io" {
+		url = "https://registry.hub.docker.com"
 	}
+
 	opt := registry.Opt{
+		Domain:   url,
 		SkipPing: true,
 		Timeout:  5 * time.Second,
 	}
-	return registry.New(auth, opt)
+	return registry.New(types.AuthConfig{}, opt)
 }
