@@ -78,12 +78,12 @@
   revision = "aabc10ec26b754e797f9028f4589c5b7bd90dc20"
 
 [[projects]]
-  digest = "1:33a6fe6b1544b08552d967a676d5eeea92c4cc379a22c9a04a76e75e3a5ce6b2"
+  digest = "1:0cb5b9c5e5754914abee038463a4c887f873861ec294c2535e3967e8042d3bcd"
   name = "github.com/genuinetools/reg"
   packages = ["registry"]
   pruneopts = "UT"
-  revision = "fc4797acd474fe66e617f491ced48c83f7aa355e"
-  version = "v0.13.1"
+  revision = "4a4d0e5d108ca9558879bdf1aba94d09e921cf1e"
+  version = "v0.16.0"
 
 [[projects]]
   digest = "1:9a688317f3231e0175b3429033f44411906c0ce119361b7b5019d01375f8cff7"

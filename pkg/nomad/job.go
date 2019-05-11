@@ -108,7 +108,7 @@ func addDigests(job *api.Job) error {
 				continue
 			}
 
-			task.Config["image"] = digest.String()
+			task.Config["image"] = registry.ImageShortString(digest)
 		}
 	}
 

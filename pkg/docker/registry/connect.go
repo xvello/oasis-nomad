@@ -5,6 +5,7 @@ import (
 
 	"github.com/docker/docker/api/types"
 	"github.com/genuinetools/reg/registry"
+	digest "github.com/opencontainers/go-digest"
 )
 
 var mockedSource Source
@@ -12,7 +13,7 @@ var mockedSource Source
 // Source in the interface registry providers must implement.
 // It allows to mock the registry connection for tests.
 type Source interface {
-	Digest(repository, ref string) (string, error)
+	Digest(image registry.Image) (digest.Digest, error)
 	Tags(repository string) ([]string, error)
 }
 

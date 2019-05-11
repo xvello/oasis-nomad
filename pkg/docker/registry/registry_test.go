@@ -39,7 +39,7 @@ func (s *registrySuite) TestTags() {
 		},
 		{
 			input: "my/repo",
-			err:   errors.New("repo my/repo not found"),
+			err:   errors.New("path my/repo not found"),
 		},
 	}
 	for _, tc := range cases {
@@ -54,7 +54,8 @@ func (s *registrySuite) TestTags() {
 }
 
 func (s *registrySuite) TestDigest() {
-	s.reg.AddTag("library/redis", "3.2", "1234")
+	sha := "sha256:87856cc39862cec77541d68382e4867d7ccb29a85a17221446c857ddaebca916"
+	s.reg.AddTag("library/redis", "3.2", sha)
 
 	cases := []struct {
 		input  string
@@ -63,19 +64,19 @@ func (s *registrySuite) TestDigest() {
 	}{
 		{
 			input: "redis",
-			err:   errors.New("ref latest not found for repo library/redis"),
+			err:   errors.New("tag latest not found for path library/redis"),
 		},
 		{
 			input:  "redis:3.2",
-			digest: "1234",
+			digest: sha,
 		},
 		{
 			input: "redis:3.4",
-			err:   errors.New("ref 3.4 not found for repo library/redis"),
+			err:   errors.New("tag 3.4 not found for path library/redis"),
 		},
 		{
 			input: "my/repo",
-			err:   errors.New("repo my/repo not found"),
+			err:   errors.New("path my/repo not found"),
 		},
 	}
 	for i, tc := range cases {
@@ -86,7 +87,7 @@ func (s *registrySuite) TestDigest() {
 			} else {
 				s.Equal(tc.err.Error(), err.Error())
 			}
-			s.Equal(tc.digest, resolved.Digest)
+			s.Equal(tc.digest, resolved.Digest.String())
 		})
 	}
 }

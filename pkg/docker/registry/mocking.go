@@ -3,6 +3,9 @@ package registry
 import (
 	"errors"
 	"fmt"
+
+	"github.com/genuinetools/reg/registry"
+	digest "github.com/opencontainers/go-digest"
 )
 
 // MockedRegistry holds data for the mock
@@ -53,24 +56,24 @@ func (m *MockedRegistry) AddTag(repo, ref, digest string) error {
 }
 
 // Digest is part of the Source interface
-func (m *MockedRegistry) Digest(repo, ref string) (string, error) {
-	r, found := m.entries[repo]
+func (m *MockedRegistry) Digest(image registry.Image) (digest.Digest, error) {
+	r, found := m.entries[image.Path]
 	if !found {
-		return "", fmt.Errorf("repo %s not found", repo)
+		return "", fmt.Errorf("path %s not found", image.Path)
 	}
-	digest, found := r[ref]
+	d, found := r[image.Tag]
 	if !found {
-		return "", fmt.Errorf("ref %s not found for repo %s", ref, repo)
+		return "", fmt.Errorf("tag %s not found for path %s", image.Tag, image.Path)
 	}
 
-	return digest, nil
+	return digest.Digest(d), nil
 }
 
 // Tags is part of the Source interface
 func (m *MockedRegistry) Tags(repo string) ([]string, error) {
 	r, found := m.entries[repo]
 	if !found {
-		return nil, fmt.Errorf("repo %s not found", repo)
+		return nil, fmt.Errorf("path %s not found", repo)
 	}
 	tags := make([]string, 0, len(r))
 	for tag := range r {

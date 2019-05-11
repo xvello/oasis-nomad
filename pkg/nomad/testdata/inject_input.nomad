@@ -23,7 +23,7 @@ job "testjob" {
     task "toupdate" {
       driver = "docker"
       config {
-        image = "library/redis:3.2@sha256:olddigest"
+        image = "library/redis:3.2@sha256:87856cc39862cec77541d68382e4867d7ccb29a85a17221446c857ddaebca916"
       }
     }  
     task "unknownimage" {
