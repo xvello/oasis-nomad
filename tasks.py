@@ -4,7 +4,7 @@ from invoke import task
 @task
 def deps(ctx, update=False):
     ctx.run("go get -u github.com/golang/dep/cmd/dep")
-    ctx.run("go get -u github.com/golang/lint/golint")
+    ctx.run("go get -u golang.org/x/lint/golint")
     ctx.run("go get -u github.com/gordonklaus/ineffassign")
     ctx.run("go get -u github.com/client9/misspell/cmd/misspell")
 
