@@ -94,6 +94,21 @@
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:e1b86a55f22a21007da87160a3e0897a35392af410d33ae82a4f165f1eec13cf"
+  name = "github.com/golang/protobuf"
+  packages = [
+    "proto",
+    "ptypes",
+    "ptypes/any",
+    "ptypes/duration",
+    "ptypes/timestamp",
+    "ptypes/wrappers",
+  ]
+  pruneopts = "UT"
+  revision = "b5d812f8a3706043e23a9cd5babf2e5423744d30"
+  version = "v1.3.1"
+
+[[projects]]
   digest = "1:e3f17aa0eb8c151426d23cb767ae50f5b42c46533db3424761ee639b56ab9041"
   name = "github.com/gorhill/cronexpr"
   packages = ["."]
@@ -126,6 +141,14 @@
   revision = "d5fe4b57a186c716b0e00b8c301cbd9b4182694d"
 
 [[projects]]
+  digest = "1:25ea9932695d50757683d43bf6175231d02183d6d92cbf0edc8bc0ffbed56581"
+  name = "github.com/hashicorp/go-hclog"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2f1b231e6eb6f042d24d2b0612253b985be5bdab"
+  version = "v0.9.1"
+
+[[projects]]
   branch = "master"
   digest = "1:2394f5a25132b3868eff44599cc28d44bdd0330806e34c495d754dd052df612b"
   name = "github.com/hashicorp/go-immutable-radix"
@@ -148,6 +171,17 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "b7773ae218740a7be65057fc60b366a49b538a44"
+
+[[projects]]
+  digest = "1:5e1aece859ec4195f3d16dd3b64a0f111e186b9e95d75141465595063e3a5254"
+  name = "github.com/hashicorp/go-plugin"
+  packages = [
+    ".",
+    "internal/plugin",
+  ]
+  pruneopts = "UT"
+  revision = "52e1c4730856c1438ced7597c9b5c585a7bd06a2"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -194,7 +228,7 @@
   revision = "ef8a98b0bbce4a65b5aa4c368430a80ddc533168"
 
 [[projects]]
-  digest = "1:2270a5b0b42571b92c1f64accae929dd1e5ea28a1a329729e935e0e201f60768"
+  digest = "1:bbfe4d051b1c636ab0f2df04e225c1c020e6b976cb8f1a79870dc5711fbe0e9f"
   name = "github.com/hashicorp/nomad"
   packages = [
     "acl",
@@ -205,11 +239,14 @@
     "helper/flatmap",
     "helper/uuid",
     "jobspec",
+    "lib/kheap",
     "nomad/structs",
+    "plugins/shared/structs",
+    "plugins/shared/structs/proto",
   ]
   pruneopts = "UT"
-  revision = "75c5fb48c53cfa95926a941a55b3f06553be2d0f"
-  version = "v0.8.4"
+  revision = "23c4597dbb6d1d46e020301b0f63db5cff80d3f0"
+  version = "v0.9.1"
 
 [[projects]]
   digest = "1:56f26733346010e935b1ddb0e1ffa00bb054133b3ddb3f481261d27a7ae914df"
@@ -226,6 +263,14 @@
   pruneopts = "UT"
   revision = "d6574a5bb1226678d7010325fb6c985db20ee458"
   version = "v0.8.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:a4826c308e84f5f161b90b54a814f0be7d112b80164b9b884698a6903ea47ab3"
+  name = "github.com/hashicorp/yamux"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2f1d1f20f75d5404f53b9edf6b53ed5505508675"
 
 [[projects]]
   digest = "1:870d441fe217b8e689d7949fef6e43efbc787e50f200cb1e70dbca9204a1d6be"
@@ -252,6 +297,14 @@
   revision = "b8bc1bf767474819792c23f32d8286a45736f1c6"
 
 [[projects]]
+  digest = "1:42eb1f52b84a06820cedc9baec2e710bfbda3ee6dac6cdb97f8b9a5066134ec6"
+  name = "github.com/mitchellh/go-testing-interface"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "6d0b8010fcc857872e42fc6c931227569016843c"
+  version = "v1.0.0"
+
+[[projects]]
   branch = "master"
   digest = "1:544635141f5fb084637823f438f3563be046a9730c256d2e7760dbb741cd88b5"
   name = "github.com/mitchellh/hashstructure"
@@ -274,6 +327,14 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "63d60e9d0dbc60cf9164e6510889b0db6683d98c"
+
+[[projects]]
+  digest = "1:9ec6cf1df5ad1d55cf41a43b6b1e7e118a91bade4f68ff4303379343e40c0e25"
+  name = "github.com/oklog/run"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "4dadeb3030eda0273a12382bb2348ffc7c9d1a39"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -308,6 +369,14 @@
   packages = ["difflib"]
   pruneopts = "UT"
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
+  version = "v1.0.0"
+
+[[projects]]
+  digest = "1:6baa565fe16f8657cf93469b2b8a6c61a277827734400d27e44d589547297279"
+  name = "github.com/ryanuber/go-glob"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "51a8f68e6c24dc43f1e371749c89a267de4ebc53"
   version = "v1.0.0"
 
 [[projects]]
@@ -373,6 +442,22 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:07c70ed7db30e61c8e28f5139a426deef24d6be14a16a679f2c38e89b1704475"
+  name = "golang.org/x/net"
+  packages = [
+    "context",
+    "http/httpguts",
+    "http2",
+    "http2/hpack",
+    "idna",
+    "internal/timeseries",
+    "trace",
+  ]
+  pruneopts = "UT"
+  revision = "a4d6f7feada510cc50e69a37b484cb0fdc6b7876"
+
+[[projects]]
+  branch = "master"
   digest = "1:ab083f18c5805706a6c85110890412eeb7124d452c7185ecc649e798e8405418"
   name = "golang.org/x/sys"
   packages = [
@@ -382,6 +467,82 @@
   ]
   pruneopts = "UT"
   revision = "6f686a352de66814cdd080d970febae7767857a3"
+
+[[projects]]
+  digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
+  name = "golang.org/x/text"
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/language",
+    "internal/language/compact",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "secure/bidirule",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+  ]
+  pruneopts = "UT"
+  revision = "342b2e1fbaa52c93f31447ad2c6abc048c63e475"
+  version = "v0.3.2"
+
+[[projects]]
+  branch = "master"
+  digest = "1:fc5df4cb84cdf639ef702c176a50a9ee08ea3e68ebd67519c0f4f963c7d82978"
+  name = "google.golang.org/genproto"
+  packages = ["googleapis/rpc/status"]
+  pruneopts = "UT"
+  revision = "b515fa19cec88c32f305a962f34ae60068947aea"
+
+[[projects]]
+  digest = "1:3872cbb62092d8ae2141bcc0fa35da31afa62bf4b695ec345a81daec6714b093"
+  name = "google.golang.org/grpc"
+  packages = [
+    ".",
+    "balancer",
+    "balancer/base",
+    "balancer/roundrobin",
+    "binarylog/grpc_binarylog_v1",
+    "codes",
+    "connectivity",
+    "credentials",
+    "credentials/internal",
+    "encoding",
+    "encoding/proto",
+    "grpclog",
+    "health",
+    "health/grpc_health_v1",
+    "internal",
+    "internal/backoff",
+    "internal/balancerload",
+    "internal/binarylog",
+    "internal/channelz",
+    "internal/envconfig",
+    "internal/grpcrand",
+    "internal/grpcsync",
+    "internal/syscall",
+    "internal/transport",
+    "keepalive",
+    "metadata",
+    "naming",
+    "peer",
+    "resolver",
+    "resolver/dns",
+    "resolver/passthrough",
+    "stats",
+    "status",
+    "tap",
+  ]
+  pruneopts = "UT"
+  revision = "25c4f928eaa6d96443009bd842389fb4fa48664e"
+  version = "v1.20.1"
 
 [solve-meta]
   analyzer-name = "dep"
