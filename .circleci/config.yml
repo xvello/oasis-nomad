@@ -10,7 +10,7 @@ jobs:
          keys:
            - vendor-{{ checksum "Gopkg.lock" }}
       - run: ls vendor/ || dep ensure -vendor-only
-      - run: inv -e lint test build
+      - run: inv -e lint test itest build
       - save_cache:
           key: vendor-{{ checksum "Gopkg.lock" }}
           paths:

@@ -108,6 +108,14 @@
   version = "v0.16.0"
 
 [[projects]]
+  digest = "1:c3957c9c9dc7beb125fdc93c920957d0305fe66dc48712a600f8790ce9354254"
+  name = "github.com/go-cmd/cmd"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "db1a8287640cedff487674c2f4439805b58f42aa"
+  version = "v1.0.4"
+
+[[projects]]
   digest = "1:e1b86a55f22a21007da87160a3e0897a35392af410d33ae82a4f165f1eec13cf"
   name = "github.com/golang/protobuf"
   packages = [
@@ -728,6 +736,7 @@
     "github.com/codeclysm/extract",
     "github.com/docker/docker/api/types",
     "github.com/genuinetools/reg/registry",
+    "github.com/go-cmd/cmd",
     "github.com/hashicorp/go-version",
     "github.com/hashicorp/nomad/api",
     "github.com/hashicorp/nomad/jobspec",
