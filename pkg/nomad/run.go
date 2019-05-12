@@ -6,17 +6,20 @@ import (
 	"github.com/hashicorp/nomad/api"
 	"github.com/hashicorp/nomad/jobspec"
 	log "github.com/sirupsen/logrus"
+	"github.com/xvello/oasis-nomad/pkg/input"
 )
 
 // Run parses job specs, resolves the image digests and runs the jobs
-func (c *Client) Run(files []string) error {
-	hasError := 0
+func (c *Client) Run(targets *input.Targets) error {
+	var total, hasError int
 
-	for _, f := range globFileList(files) {
-		job, err := jobspec.ParseFile(f)
+	for f := range targets.Files() {
+		total++
+		job, err := jobspec.Parse(f)
+		f.Close()
 		if err != nil {
 			log.WithFields(log.Fields{
-				"file":  f,
+				"file":  f.Name(),
 				"error": err,
 			}).Warn("Cannot parse file")
 			hasError++
@@ -30,7 +33,7 @@ func (c *Client) Run(files []string) error {
 	}
 
 	if hasError > 0 {
-		return fmt.Errorf("%d out of %d jobs errored out", hasError, len(files))
+		return fmt.Errorf("%d out of %d jobs errored out", hasError, total)
 	}
 	return nil
 }
