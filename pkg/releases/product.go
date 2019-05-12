@@ -44,6 +44,15 @@ func (p *ReleaseProduct) Latest(stable bool) (*ReleaseVersion, error) {
 	return v, nil
 }
 
+// Find returns the version matching the given string
+func (p *ReleaseProduct) Find(version string) (*ReleaseVersion, error) {
+	v, found := p.Versions[version]
+	if !found {
+		return nil, fmt.Errorf("Cannot find version %s", version)
+	}
+	return v, nil
+}
+
 // ListVersions returns all the available versions
 func (p *ReleaseProduct) ListVersions(stable bool) ([]*version.Version, error) {
 	if p.Versions == nil {

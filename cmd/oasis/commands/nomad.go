@@ -31,6 +31,7 @@ func init() {
 	agentCmd.AddCommand(agentUpgradeCmd)
 	agentUpgradeCmd.Flags().StringP("os", "o", "linux", "target OS")
 	agentUpgradeCmd.Flags().StringP("arch", "a", "amd64", "target architecture")
+	agentUpgradeCmd.Flags().StringP("version", "v", "latest", "version to install")
 }
 
 func agentUpgrade(cmd *cobra.Command, args []string) error {
@@ -39,6 +40,10 @@ func agentUpgrade(cmd *cobra.Command, args []string) error {
 		return err
 	}
 	buildArch, err := cmd.Flags().GetString("arch")
+	if err != nil {
+		return err
+	}
+	buildVersion, err := cmd.Flags().GetString("version")
 	if err != nil {
 		return err
 	}
@@ -52,19 +57,24 @@ func agentUpgrade(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	latest, err := nomadVersions.Latest(true)
+	var rel *releases.ReleaseVersion
+	if buildVersion == "latest" {
+		rel, err = nomadVersions.Latest(true)
+	} else {
+		rel, err = nomadVersions.Find(buildVersion)
+	}
 	if err != nil {
 		return err
 	}
 	log.WithFields(log.Fields{
-		"version": latest.Version,
+		"version": rel.Version,
 	}).Info("Found nomad version")
 
 	dest := filepath.Join(prefix, "bin", "nomad")
-	destVer := fmt.Sprintf("%s-%s", dest, latest.Version)
+	destVer := fmt.Sprintf("%s-%s", dest, rel.Version)
 
 	_ = os.Remove(destVer)
-	err = latest.Download(destVer, buildOs, buildArch)
+	err = rel.Download(destVer, buildOs, buildArch)
 	if err != nil {
 		return err
 	}

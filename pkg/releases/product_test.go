@@ -21,6 +21,14 @@ func TestParseReleases(t *testing.T) {
 	require.NoError(t, err)
 }
 
+func TestFindVersion(t *testing.T) {
+	r, _ := parseIndexFixture()
+	l, err := r.Find("0.8.1")
+	require.NoError(t, err)
+	require.NotNil(t, l)
+	assert.Equal(t, "0.8.1", l.Version)
+}
+
 func TestLatestStable(t *testing.T) {
 	r, _ := parseIndexFixture()
 	l, err := r.Latest(true)
