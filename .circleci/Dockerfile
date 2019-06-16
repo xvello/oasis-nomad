@@ -1,3 +1,13 @@
+FROM golang:1.12 as builder
+
+RUN go get -u github.com/golang/dep/cmd/dep \
+ && go get -u golang.org/x/lint/golint \
+ && go get -u github.com/gordonklaus/ineffassign \
+ && go get -u github.com/client9/misspell/cmd/misspell \
+ && go get -u github.com/docker/distribution/cmd/registry
+
+
+
 FROM golang:1.12
 
 WORKDIR /go/src/github.com/xvello/oasis-nomad
@@ -9,8 +19,4 @@ RUN apt-get update \
 
 RUN pip3 install invoke
 
-RUN go get -u github.com/golang/dep/cmd/dep \
- && go get -u golang.org/x/lint/golint \
- && go get -u github.com/gordonklaus/ineffassign \
- && go get -u github.com/client9/misspell/cmd/misspell \
- && go get -u github.com/docker/distribution/cmd/registry
+COPY --from=builder /go/bin/* /go/bin/
