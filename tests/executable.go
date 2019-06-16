@@ -13,6 +13,24 @@ import (
 	"github.com/xvello/oasis-nomad/pkg/releases"
 )
 
+const (
+	nomadBaseURL = "http://localhost:44646"
+)
+
+type backgroundRun struct {
+	cmd        *cmd.Cmd
+	statusChan <-chan cmd.Status
+}
+
+func (c *backgroundRun) wait() cmd.Status {
+	return <-c.statusChan
+}
+
+func (c *backgroundRun) stop() cmd.Status {
+	c.cmd.Stop()
+	return c.wait()
+}
+
 type executable struct {
 	Command     string
 	DefaultArgs []string
@@ -22,11 +40,11 @@ type executable struct {
 
 func (e *executable) run(args ...string) cmd.Status {
 	c := e.runBackground(args...)
-	result := <-c.Start()
+	result := <-c.statusChan
 	return result
 }
 
-func (e *executable) runBackground(args ...string) *cmd.Cmd {
+func (e *executable) runBackground(args ...string) *backgroundRun {
 	c := cmd.NewCmdOptions(cmd.Options{Buffered: true}, e.Command, args...)
 	if len(c.Args) == 0 {
 		c.Args = e.DefaultArgs
@@ -38,14 +56,17 @@ func (e *executable) runBackground(args ...string) *cmd.Cmd {
 		os.MkdirAll(e.DataDirPath, 0700)
 	}
 
-	return c
+	return &backgroundRun{
+		cmd:        c,
+		statusChan: c.Start(),
+	}
 }
 
 func newOasis(t *testing.T) *executable {
 	return &executable{
 		Command: "../oasis",
 		Env: []string{
-			"NOMAD_ADDR=http://localhost:44646",
+			"NOMAD_ADDR=" + nomadBaseURL,
 		},
 	}
 }
@@ -63,7 +84,7 @@ func newNomadServer(t *testing.T, folder, version string) *executable {
 	return &executable{
 		Command: dest,
 		DefaultArgs: []string{
-			"agent", "serve",
+			"agent",
 			"-config", buildAbs(t, "testdata/nomad.hcl"),
 			"-data-dir", dataDir,
 		},

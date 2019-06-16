@@ -13,7 +13,6 @@ import (
 
 type NomadUpgradeSuite struct {
 	*oasisSuite
-	oasis *executable
 }
 
 func (s *NomadUpgradeSuite) SetupTest() {
@@ -60,6 +59,5 @@ func (s *NomadUpgradeSuite) TestDownloadAndUpgrade() {
 func TestNomadUpgradeSuite(t *testing.T) {
 	suite.Run(t, &NomadUpgradeSuite{
 		oasisSuite: newSuite(scratchDir),
-		oasis:      newOasis(t),
 	})
 }

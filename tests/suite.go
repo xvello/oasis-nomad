@@ -24,6 +24,9 @@ type oasisSuite struct {
 	suiteCtx  context.Context
 	ctxCancel context.CancelFunc
 	tempDir   string
+	oasis     *executable
+	nomad     *executable
+	nomadRun  *backgroundRun
 }
 
 func newSuite(want ...fixture) *oasisSuite {
@@ -50,6 +53,12 @@ func (s *oasisSuite) SetupSuite() {
 	s.tempDir, err = ioutil.TempDir("", "oasis-testing-")
 	require.NoError(s.T(), err)
 
+	if s.Wants(nomadServer) {
+		s.nomad = newNomadServer(s.T(), s.tempDir, "0.9.1")
+		require.NotNil(s.T(), s.nomad)
+	}
+
+	s.oasis = newOasis(s.T())
 	s.suiteCtx, s.ctxCancel = context.WithCancel(context.Background())
 }
 
@@ -63,11 +72,20 @@ func (s *oasisSuite) SetupTest() {
 		err := os.MkdirAll(s.ScratchPath(), 0700)
 		require.NoError(s.T(), err)
 	}
+
+	if s.Wants(nomadServer) {
+		s.nomadRun = s.nomad.runBackground()
+	}
 }
 
 func (s *oasisSuite) TearDownTest() {
 	if s.Wants(scratchDir) {
 		err := os.RemoveAll(s.ScratchPath())
 		require.NoError(s.T(), err)
+	}
+
+	if s.nomadRun != nil {
+		s.nomadRun.stop()
+		s.nomadRun = nil
 	}
 }
