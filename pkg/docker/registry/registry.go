@@ -9,6 +9,7 @@ import (
 const (
 	dockerHubPrefix     = "docker.io/"
 	dockerLibraryPrefix = dockerHubPrefix + "library/"
+	digestPrefix        = "@sha256:"
 )
 
 // TagsForImage returns all available tags for a
@@ -39,6 +40,7 @@ func ResolveDigest(i registry.Image) (registry.Image, error) {
 	if err != nil {
 		return i, err
 	}
+
 	err = i.WithDigest(digest)
 	if err != nil {
 		return i, err
@@ -50,7 +52,8 @@ func ResolveDigest(i registry.Image) (registry.Image, error) {
 // ResolveFromString parses an image string as ImageSpec
 // and resolves the latest available digest
 func ResolveFromString(image string) (registry.Image, error) {
-	spec, err := registry.ParseImage(image)
+	trimmedDigest := strings.Split(image, digestPrefix)[0]
+	spec, err := registry.ParseImage(trimmedDigest)
 	if err != nil {
 		return spec, err
 	}

@@ -54,6 +54,7 @@ func (s *registrySuite) TestTags() {
 }
 
 func (s *registrySuite) TestDigest() {
+	olderSha := "sha256:db39a861d74aab313f4a2c0237b2afb8b146e256ac69e7493f8f0fac8e535fb0"
 	sha := "sha256:87856cc39862cec77541d68382e4867d7ccb29a85a17221446c857ddaebca916"
 	s.reg.AddTag("library/redis", "3.2", sha)
 
@@ -68,6 +69,14 @@ func (s *registrySuite) TestDigest() {
 		},
 		{
 			input:  "redis:3.2",
+			digest: sha,
+		},
+		{
+			input:  "redis:3.2@" + olderSha,
+			digest: sha,
+		},
+		{
+			input:  "redis:3.2@" + sha,
 			digest: sha,
 		},
 		{

@@ -57,6 +57,9 @@ func (m *MockedRegistry) AddTag(repo, ref, digest string) error {
 
 // Digest is part of the Source interface
 func (m *MockedRegistry) Digest(image registry.Image) (digest.Digest, error) {
+	if len(image.Digest) > 0 {
+		return image.Digest, nil
+	}
 	r, found := m.entries[image.Path]
 	if !found {
 		return "", fmt.Errorf("path %s not found", image.Path)
